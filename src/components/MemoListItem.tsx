@@ -1,45 +1,81 @@
-import { View, Text, TouchableOpacity, StyleSheet} from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native'
 import { Link } from 'expo-router'
+import { deleteDoc, doc } from 'firebase/firestore'
 
 import Icon from './Icon'
+import { type Memo } from '../../types/memo'
+import { auth, db } from '../config'
 
-const MemoListItem = (): JSX.Element => {
-    return (
-        <Link href='/memo/detail' asChild>
+// タイプ指定
+interface Props {
+  memo: Memo
+
+}
+
+// メモの削除処理
+const handlePress = (id: string): void => {
+  if (auth.currentUser === null) { return }
+  const ref = doc(db, `users/${auth.currentUser.uid}/memos`, id)
+  Alert.alert('メモを削除します', '宜しいでしょうか', [
+    {
+      text: 'キャンセル'
+
+    },
+    {
+      text: '削除する',
+      style: 'destructive',
+      onPress: () => {
+        deleteDoc(ref)
+          .catch(() => { Alert.alert('削除に失敗しました') })
+      }
+    }
+  ])
+}
+
+const MemoListItem = (props: Props): JSX.Element | null => {
+  const { memo } = props
+  const { bodyText, updatedAt } = memo
+  if (bodyText === null || updatedAt === null) { return null }
+  const dateString = updatedAt.toDate().toLocaleString('ja-JP')
+  return (
+        <Link
+        // どのメモにアクセスするかidを指定
+        href={{ pathname: '/memo/detail', params: { id: memo.id } }}
+        asChild>
             <TouchableOpacity style={styles.memoListItem}>
                 <View>
-                    <Text style={styles.memoListItemTitle}>買い物リスト</Text>
-                    <Text style={styles.memoListItemDate}>2023年10月15日</Text>
+                    <Text numberOfLines={1} style={styles.memoListItemTitle}>{bodyText}</Text>
+                    <Text style={styles.memoListItemDate}>{dateString}</Text>
                 </View>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => { handlePress(memo.id) }}>
                     <Icon name='delete' size={38} color='#B0B0B0' />
-                </TouchableOpacity>  
+                </TouchableOpacity>
             </TouchableOpacity>
         </Link>
-        
-    )
+
+  )
 }
 
 const styles = StyleSheet.create({
-    memoListItem: {
-        backgroundColor: 'white',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingVertical: 16,
-        paddingHorizontal: 19,
-        alignItems: 'center',
-        borderBottomWidth: 1,
-        borderColor: 'rgba(0,0,0,0.15)'
-    },
-    memoListItemTitle: {
-        fontSize: 16,
-        lineHeight: 32
-    },
-    memoListItemDate: {
-        fontSize: 12,
-        lineHeight: 16,
-        color: '#848484'
-    }
+  memoListItem: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingVertical: 16,
+    paddingHorizontal: 19,
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderColor: 'rgba(0,0,0,0.15)'
+  },
+  memoListItemTitle: {
+    fontSize: 16,
+    lineHeight: 32
+  },
+  memoListItemDate: {
+    fontSize: 12,
+    lineHeight: 16,
+    color: '#848484'
+  }
 })
 
 export default MemoListItem
