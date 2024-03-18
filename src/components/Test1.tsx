@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { Link } from 'expo-router'
 
 interface Props {
   imageuri: string
@@ -10,6 +11,9 @@ interface Props {
 const Test1 = (props: Props): JSX.Element => {
   const { imageuri, title, subtext } = props
   return (
+
+<Link href={{ pathname: '/memo/list' }}asChild>
+          <TouchableOpacity>
     <View style={styles.box}>
       <View style={styles.moziBox}>
         <Text style={styles.text}>{title}</Text>
@@ -20,6 +24,8 @@ const Test1 = (props: Props): JSX.Element => {
         <Image style={{ width: 100, height: 100 }} src={ imageuri } />
       </View>
     </View>
+    </TouchableOpacity>
+</Link>
   )
 }
 
