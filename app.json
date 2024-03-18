@@ -27,6 +27,9 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
+    "extra": {
+      "TestKeyNews" : "bf39bb0eb94c493a9263ffffcda774ed"
+    },
     "plugins": [
       "expo-router",
       "expo-font"
