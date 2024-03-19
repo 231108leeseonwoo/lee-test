@@ -10,14 +10,23 @@ interface Props {
 
 const Test1 = (props: Props): JSX.Element => {
   const { imageuri, title, subtext } = props
+
+  const date = new Date(subtext)
+  const year = date.getFullYear()
+  const month = date.getMonth() + 1
+  const day = date.getDate()
+  const hour = date.getHours()
+  const min = date.getMinutes()
+  const hiduke = year + '年' + month + '月' + day + '日' + hour + '時' + min + '分'
+
   return (
 
 <Link href={{ pathname: '/memo/list' }}asChild>
-          <TouchableOpacity>
+    <TouchableOpacity>
     <View style={styles.box}>
       <View style={styles.moziBox}>
-        <Text style={styles.text}>{title}</Text>
-        <Text style={styles.subText}>{subtext}</Text>
+        <Text numberOfLines={2} style={styles.text}>{title}</Text>
+        <Text style={styles.subText}>{hiduke}</Text>
       </View>
 
       <View style={styles.gazoBox}>
@@ -42,7 +51,7 @@ const styles = StyleSheet.create({
 
   moziBox: {
     flex: 1,
-    backgroundColor: 'steelblue',
+    // backgroundColor: 'steelblue',
     padding: 16,
     justifyContent: 'space-between'
   },
@@ -58,6 +67,6 @@ const styles = StyleSheet.create({
 
   subText: {
     fontSize: 12,
-    color: 'red'
+    color: 'black'
   }
 })

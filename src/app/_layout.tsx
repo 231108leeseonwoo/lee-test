@@ -1,4 +1,4 @@
-import { Stack } from 'expo-router'
+import { Stack, Tabs } from 'expo-router'
 
 const Layout = (): JSX.Element => {
   return <Stack screenOptions={{
@@ -6,12 +6,13 @@ const Layout = (): JSX.Element => {
       backgroundColor: 'green'
     },
     headerTintColor: 'white',
-    headerTitle: 'TT Score',
+    headerTitle: 'App',
     headerBackTitle: 'Back',
     headerTitleStyle: {
-      fontSize: 22,
+      fontSize: 32,
       fontWeight: 'bold'
-    }
+    },
+    headerTitleAlign: 'center'
   }} />
 }
 

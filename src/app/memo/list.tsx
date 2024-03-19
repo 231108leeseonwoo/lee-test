@@ -9,35 +9,13 @@ import Icon from '../../components/Icon'
 import LogOutButton from '../../components/LogOutButton'
 import { db, auth } from '../../config'
 import { type Memo } from '../../../types/memo'
-import Constants from 'expo-constants'
-import axios from 'axios'
-import Test1 from '../../components/Test1'
-
-// Test News : url取得
-const URI = 'https://newsapi.org/v2/top-headlines?country=jp&category=entertainment&apiKey=bf39bb0eb94c493a9263ffffcda774ed'
+import Footer from '../../components/Footer'
 
 const handlePress = (): void => {
   router.push('/memo/create')
 }
 
 const List = (): JSX.Element => {
-  // Test News
-  const [news, setNews] = useState([])
-
-  useEffect(() => {
-    getNews()
-  }, [])
-
-  const getNews = async () => {
-    const response = await axios.get(URI)
-    // console.log(response)
-    setNews(response.data.articles)
-  }
-
-  useEffect(() => {
-    alert(Constants?.expoConfig?.extra?.TestKeyNews)
-  }, [])
-
   // ここからがMemo機能
   // 表示するデータの変数を指定 + データ形を読み込んで適用
   const [memos, setMemos] = useState<Memo[]>([])
@@ -80,22 +58,11 @@ const List = (): JSX.Element => {
 
         <View style={styles.container}>
 
-                                                                  <FlatList
-                                                                    data={news}
-                                                                    renderItem={({ item }) => (
-                                                                      <Test1
-                                                                        imageuri={item.urlToImage}
-                                                                        title={item.title}
-                                                                        subtext={item.publishedAt}
-                                                                      />
-                                                                    )}
-                                                                    keyExtractor={(item, index) => index.toString()}
-                                                                  />
-
             <FlatList
               data={memos}
               renderItem={({ item }) => <MemoListItem memo={item} /> }
             />
+            <Footer />
             <CircleButton onPress={handlePress}>
                 <Icon name='plus' size={40} color= 'white' />
             </CircleButton>
