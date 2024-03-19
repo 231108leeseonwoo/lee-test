@@ -1,15 +1,15 @@
 import React from 'react'
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
-import { Link } from 'expo-router'
+import { StyleSheet, Text, View, Image, TouchableOpacity, Linking } from 'react-native'
 
 interface Props {
   imageuri: string
   title: string
   subtext: string
+  siteUrl: string
 }
 
 const Test1 = (props: Props): JSX.Element => {
-  const { imageuri, title, subtext } = props
+  const { imageuri, title, subtext, siteUrl } = props
 
   const date = new Date(subtext)
   const year = date.getFullYear()
@@ -21,8 +21,11 @@ const Test1 = (props: Props): JSX.Element => {
 
   return (
 
-<Link href={{ pathname: '/memo/list' }}asChild>
-    <TouchableOpacity>
+    <TouchableOpacity
+    onPress={() => {
+      Linking.openURL(siteUrl)
+    }}
+  >
     <View style={styles.box}>
       <View style={styles.moziBox}>
         <Text numberOfLines={2} style={styles.text}>{title}</Text>
@@ -34,7 +37,7 @@ const Test1 = (props: Props): JSX.Element => {
       </View>
     </View>
     </TouchableOpacity>
-</Link>
+
   )
 }
 
