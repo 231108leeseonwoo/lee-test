@@ -23,15 +23,13 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: '#467FD3',
+    backgroundColor: 'green',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
     right: 25,
     bottom: 70,
     shadowColor: 'black',
-    shadowOpacity: '0.25',
-    shadowRadius: '8',
     shadowOffset: { width: 0, height: 8 },
     elevation: 8
 

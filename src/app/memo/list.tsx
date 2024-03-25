@@ -9,7 +9,6 @@ import Icon from '../../components/Icon'
 import LogOutButton from '../../components/LogOutButton'
 import { db, auth } from '../../config'
 import { type Memo } from '../../../types/memo'
-import Footer from '../../components/Footer'
 
 const handlePress = (): void => {
   router.push('/memo/create')
@@ -62,7 +61,7 @@ const List = (): JSX.Element => {
               data={memos}
               renderItem={({ item }) => <MemoListItem memo={item} /> }
             />
-            <Footer />
+
             <CircleButton onPress={handlePress}>
                 <Icon name='plus' size={40} color= 'white' />
             </CircleButton>

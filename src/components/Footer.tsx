@@ -12,12 +12,6 @@ const Header = (): JSX.Element => {
 
           </Link>
 
-          <Link href={{ pathname: '/memo/list3' }}asChild>
-
-              <Text style={styles.score}>Score</Text>
-
-          </Link>
-
           <Link href={{ pathname: '/memo/list' }}asChild>
 
               <Text style={styles.memo}>Memo</Text>

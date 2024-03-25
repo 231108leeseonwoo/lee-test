@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
   memoListItemTitle: {
     fontSize: 16,
     lineHeight: 32
+
   },
   memoListItemDate: {
     fontSize: 12,

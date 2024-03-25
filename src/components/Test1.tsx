@@ -23,18 +23,21 @@ const Test1 = (props: Props): JSX.Element => {
 
     <TouchableOpacity
     onPress={() => {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       Linking.openURL(siteUrl)
     }}
   >
     <View style={styles.box}>
-      <View style={styles.moziBox}>
-        <Text numberOfLines={2} style={styles.text}>{title}</Text>
-        <Text style={styles.subText}>{hiduke}</Text>
-      </View>
 
       <View style={styles.gazoBox}>
         <Image style={{ width: 100, height: 100 }} src={ imageuri } />
       </View>
+
+      <View style={styles.moziBox}>
+        <Text numberOfLines={3} style={styles.text}>{title}</Text>
+        <Text style={styles.subText}>{hiduke}</Text>
+      </View>
+
     </View>
     </TouchableOpacity>
 
@@ -47,29 +50,28 @@ const styles = StyleSheet.create({
   box: {
     height: 100,
     width: '100%',
-    borderColor: 'lightblue',
+    borderColor: 'green',
     borderWidth: 1,
     flexDirection: 'row'
   },
 
   moziBox: {
     flex: 1,
-    // backgroundColor: 'steelblue',
-    padding: 16,
+    padding: 10,
     justifyContent: 'space-between'
   },
 
   gazoBox: {
     width: 100,
-    backgroundColor: 'powderblue'
+    backgroundColor: 'green'
   },
 
   text: {
-    fontSize: 16
+    fontSize: 15
   },
 
   subText: {
-    fontSize: 12,
+    fontSize: 9,
     color: 'black'
   }
 })
