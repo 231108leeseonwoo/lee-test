@@ -1,4 +1,4 @@
-import { Stack, Tabs } from 'expo-router'
+import { Stack } from 'expo-router'
 
 const Layout = (): JSX.Element => {
   return <Stack screenOptions={{
